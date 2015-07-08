@@ -28,7 +28,7 @@ var Validator = require('o-validator');
 Validator.validateOrThrow({
   username : prr.isStringOfLengthAtMost(15),
   email    : Validator.required(prr.isEmail),
-  age      : R.allPass([prr.isNumberBetween(13, 100)])
+  age      : prr.isNumberBetween(13, 100)
 });
 
 ```
