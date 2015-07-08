@@ -237,6 +237,16 @@ expect(prr.isOddNumber(8)).toBe(false);
 ```
 
 ---
+### isNumericBoolean
+Number → Boolean
+```
+expect(prr.isNumericBoolean(0)).toBe(true);
+expect(prr.isNumericBoolean(1)).toBe(true);
+expect(prr.isNumericBoolean(3)).toBe(false);
+expect(prr.isNumericBoolean('1')).toBe(false);
+```
+
+---
 ### numberIsOneOf
 Number → Array → Boolean
 ```
@@ -294,7 +304,7 @@ expect(prr.isArrayOfLengthAtMost(3, 123)).toBe(false);
 ```
 
 ---
-### isArraylongerThan
+### isArrayLongerThan
 Number → Array → Boolean
 ```
 expect(prr.isArrayLongerThan(5, [1,2,3])).toBe(false);

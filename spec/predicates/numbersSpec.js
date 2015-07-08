@@ -180,4 +180,19 @@ describe('number predicates', function() {
       expect(numbers.numberIsOneOf([123, 456, 789], '123')).toBe(false);
     });
   });
+
+  describe('isNumericBoolean', function() {
+    it('should pass when given 0', function() {
+      expect(numbers.isNumericBoolean(0)).toBe(true);
+    });
+    it('should pass when given 1', function() {
+      expect(numbers.isNumericBoolean(1)).toBe(true);
+    });
+    it('should fail when given a subject of type Number that is not 0 or 1', function() {
+      expect(numbers.isNumericBoolean(3)).toBe(false);
+    });
+    it('should fail when given a subject not of type Number', function() {
+      expect(numbers.isNumericBoolean('1')).toBe(false);
+    });
+  });
 });
