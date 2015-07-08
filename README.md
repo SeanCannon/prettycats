@@ -1,7 +1,7 @@
 # prettycats
 Common curried predicates for validating subjects.
 
-[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![Build Status](https://travis-ci.org/SeanCannon/prettycats.svg?branch=master)](https://travis-ci.org/SeanCannon/prettycats) [![Coverage Status](https://coveralls.io/repos/SeanCannon/prettycats/badge.svg?branch=master&service=github)](https://coveralls.io/github/SeanCannon/prettycats?branch=master) [![npm version](http://img.shields.io/npm/v/prettycats.svg)](https://npmjs.org/package/prettycats) [![Dependency Status](https://david-dm.org/SeanCannon/prettycats.svg)](https://david-dm.org/SeanCannon/prettycats)
 
 ## Install
 
@@ -240,9 +240,9 @@ expect(prr.isOddNumber(8)).toBe(false);
 ### numberIsOneOf
 Number → Array → Boolean
 ```
-expect(prr.numberIsOneOf('foo', ['foo', 'bar', 'baz'])).toBe(true);
-expect(prr.numberIsOneOf('buz', ['foo', 'bar', 'baz'])).toBe(false);
-expect(prr.numberIsOneOf(123, ['foo', 'bar', 'baz'])).toBe(false);
+expect(numbers.numberIsOneOf([123, 456, 789], 123)).toBe(true);
+expect(numbers.numberIsOneOf([12, 34, 56], 123)).toBe(false);
+expect(numbers.numberIsOneOf([123, 456, 789], '123')).toBe(false);
 ```
 
 
@@ -324,10 +324,3 @@ expect(prr.isArrayContaining('bar', ['foo','baz','buz'])).toBe(false);
 ## TODO
 * Add object pretty cats
 * Add more cats
-
-
-[travis-image]: https://travis-ci.org/SeanCannon/prettycats.svg?branch=master
-[travis-url]: https://travis-ci.org/SeanCannon/prettycats
-
-[coveralls-image]: https://coveralls.io/repos/SeanCannon/prettycats/badge.svg?branch=master
-[coveralls-url]: https://coveralls.io/r/SeanCannon/prettycats?branch=master
