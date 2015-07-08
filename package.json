@@ -1,0 +1,35 @@
+{
+  "name"            : "prettycats",
+  "version"         : "0.0.6",
+  "description"     : "Helpful, common, and curried predicates library built on Ramda.",
+  "main"            : "lib/prettycats.js",
+  "dependencies"    : {
+    "ramda"       : "^0.15.0"
+  },
+  "devDependencies" : {
+    "coveralls" : "^2.11.2",
+    "istanbul"  : "^0.3.13",
+    "jasmine"   : "^2.3.1"
+  },
+  "scripts"         : {
+    "test" : "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine"
+  },
+  "repository"      : {
+    "type" : "git",
+    "url"  : "https://github.com/seancannon/prettycats.git"
+  },
+  "keywords"        : [
+    "validator",
+    "validation",
+    "predicates",
+    "pretty",
+    "cats",
+    "ramda"
+  ],
+  "author"          : "Sean Cannon",
+  "license"         : "MIT",
+  "bugs"            : {
+    "url" : "https://github.com/seancannon/prettycats/issues"
+  },
+  "homepage"        : "https://github.com/seancannon/prettycats"
+}

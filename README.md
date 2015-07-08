@@ -1,6 +1,8 @@
 # prettycats
 Common curried predicates for validating subjects.
 
+[![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+
 ## Install
 
 ```
@@ -24,9 +26,9 @@ var prr = require('prettycats'),
 var Validator = require('o-validator');
 
 Validator.validateOrThrow({
-  username : prr.str.isStringOfLengthAtMost(15),
-  email    : Validator.required(prr.str.isEmail),
-  age      : R.allPass([prr.num.isBetween(13, 100)])
+  username : prr.isStringOfLengthAtMost(15),
+  email    : Validator.required(prr.isEmail),
+  age      : R.allPass([prr.isNumberBetween(13, 100)])
 });
 
 ```
@@ -36,82 +38,91 @@ Validator.validateOrThrow({
 ### isString
 String → Boolean
 ```
-expect(prr.str.isString('foo')).toBe(true);
-expect(prr.str.isString(123)).toBe(false);
+expect(prr.isString('foo')).toBe(true);
+expect(prr.isString(123)).toBe(false);
 ```
 
 ---
 ### isStringOfLength
 Number → String → Boolean
 ```
-expect(prr.str.isStringOfLength(5, 'foo')).toBe(false);
-expect(prr.str.isStringOfLength(3, 'foo')).toBe(true);
-expect(prr.str.isStringOfLength(3, 123)).toBe(false);
+expect(prr.isStringOfLength(5, 'foo')).toBe(false);
+expect(prr.isStringOfLength(3, 'foo')).toBe(true);
+expect(prr.isStringOfLength(3, 123)).toBe(false);
 ```
 
 ---
 ### isStringOfLengthAtLeast
 Number → String → Boolean
 ```
-expect(prr.str.isStringOfLengthAtLeast(5, 'foo')).toBe(false);
-expect(prr.str.isStringOfLengthAtLeast(3, 'foo')).toBe(true);
-expect(prr.str.isStringOfLengthAtLeast(3, 'fooo')).toBe(true);
-expect(prr.str.isStringOfLengthAtLeast(3, 123)).toBe(false);
+expect(prr.isStringOfLengthAtLeast(5, 'foo')).toBe(false);
+expect(prr.isStringOfLengthAtLeast(3, 'foo')).toBe(true);
+expect(prr.isStringOfLengthAtLeast(3, 'fooo')).toBe(true);
+expect(prr.isStringOfLengthAtLeast(3, 123)).toBe(false);
 ```
 
 ---
 ### isStringOfLengthAtMost
 Number → String → Boolean
 ```
-expect(prr.str.isStringOfLengthAtMost(5, 'fooooo')).toBe(false);
-expect(prr.str.isStringOfLengthAtMost(3, 'foo')).toBe(true);
-expect(prr.str.isStringOfLengthAtMost(5, 'fooo')).toBe(true);
-expect(prr.str.isStringOfLengthAtMost(3, 123)).toBe(false);
+expect(prr.isStringOfLengthAtMost(5, 'fooooo')).toBe(false);
+expect(prr.isStringOfLengthAtMost(3, 'foo')).toBe(true);
+expect(prr.isStringOfLengthAtMost(5, 'fooo')).toBe(true);
+expect(prr.isStringOfLengthAtMost(3, 123)).toBe(false);
 ```
 
 ---
 ### isStringLongerThan
 Number → String → Boolean
 ```
-expect(prr.str.isStringLongerThan(5, 'foo')).toBe(false);
-expect(prr.str.isStringLongerThan(3, 'foo')).toBe(false);
-expect(prr.str.isStringLongerThan(3, 'fooo')).toBe(true);
-expect(prr.str.isStringLongerThan(3, 123)).toBe(false);
+expect(prr.isStringLongerThan(5, 'foo')).toBe(false);
+expect(prr.isStringLongerThan(3, 'foo')).toBe(false);
+expect(prr.isStringLongerThan(3, 'fooo')).toBe(true);
+expect(prr.isStringLongerThan(3, 123)).toBe(false);
 ```
 
 ---
 ### isStringShorterThan
 Number → String → Boolean
 ```
-expect(prr.str.isStringShorterThan(3, 'fooo')).toBe(false);
-expect(prr.str.isStringShorterThan(3, 'foo')).toBe(false);
-expect(prr.str.isStringShorterThan(5, 'fooo')).toBe(true);
-expect(prr.str.isStringShorterThan(3, 123)).toBe(false);
+expect(prr.isStringShorterThan(3, 'fooo')).toBe(false);
+expect(prr.isStringShorterThan(3, 'foo')).toBe(false);
+expect(prr.isStringShorterThan(5, 'fooo')).toBe(true);
+expect(prr.isStringShorterThan(3, 123)).toBe(false);
 ```
 
 ---
 ### isStringContaining
 String → String → Boolean
 ```
-expect(prr.str.isStringContaining('bar', 'foobarfoo')).toBe(true);
-expect(prr.str.isStringContaining('bar', 'foobazfoo')).toBe(false);
+expect(prr.isStringContaining('bar', 'foobarfoo')).toBe(true);
+expect(prr.isStringContaining('bar', 'foobazfoo')).toBe(false);
 ```
 
 ---
 ### isStringMatching
 RegExp → String → Boolean
 ```
-expect(prr.str.isStringMatching(/bar/, 'foobarfoo')).toBe(true);
-expect(prr.str.isStringMatching(/bar/, 'foobazfoo')).toBe(false);
+expect(prr.isStringMatching(/bar/, 'foobarfoo')).toBe(true);
+expect(prr.isStringMatching(/bar/, 'foobazfoo')).toBe(false);
+```
+
+---
+### stringIsOneOf
+String → Array → Boolean
+```
+expect(prr.stringIsOneOf('foo', ['foo', 'bar', 'baz'])).toBe(true);
+expect(prr.stringIsOneOf('buz', ['foo', 'bar', 'baz'])).toBe(false);
+expect(prr.stringIsOneOf(123, ['foo', 'bar', 'baz'])).toBe(false);
 ```
 
 ---
 ### isEmail
 String → Boolean
 ```
-expect(prr.str.isEmail('foo@bar.com')).toBe(true);
-expect(prr.str.isEmail('123@localhost:1337')).toBe(true);
-expect(prr.str.isEmail('foobar.com')).toBe(false);
+expect(prr.isEmail('foo@bar.com')).toBe(true);
+expect(prr.isEmail('123@localhost:1337')).toBe(true);
+expect(prr.isEmail('foobar.com')).toBe(false);
 ```
 
 ## Numbers
@@ -119,187 +130,204 @@ expect(prr.str.isEmail('foobar.com')).toBe(false);
 ### isNumber
 Number → Boolean
 ```
-expect(prr.num.isNumber(123)).toBe(true);
-expect(prr.num.isNumber('123')).toBe(false);
+expect(prr.isNumber(123)).toBe(true);
+expect(prr.isNumber('123')).toBe(false);
 ```
 
 ---
 ### isPositiveNumber
 Number → Boolean
 ```
-expect(prr.num.isPositiveNumber(123)).toBe(true);
-expect(prr.num.isPositiveNumber(-123)).toBe(false);
-expect(prr.num.isPositiveNumber(0)).toBe(false);
-expect(prr.num.isPositiveNumber('123')).toBe(false);
+expect(prr.isPositiveNumber(123)).toBe(true);
+expect(prr.isPositiveNumber(-123)).toBe(false);
+expect(prr.isPositiveNumber(0)).toBe(false);
+expect(prr.isPositiveNumber('123')).toBe(false);
 ```
 
 ---
 ### isNegativeNumber
 Number → Boolean
 ```
-expect(prr.num.isNegativeNumber(123)).toBe(false);
-expect(prr.num.isNegativeNumber(-123)).toBe(true);
-expect(prr.num.isNegativeNumber(0)).toBe(false);
-expect(prr.num.isNegativeNumber('123')).toBe(false);
+expect(prr.isNegativeNumber(123)).toBe(false);
+expect(prr.isNegativeNumber(-123)).toBe(true);
+expect(prr.isNegativeNumber(0)).toBe(false);
+expect(prr.isNegativeNumber('123')).toBe(false);
 ```
 
 ---
 ### isAtLeastZero
 Number → Boolean
 ```
-expect(prr.num.isAtLeastZero(123)).toBe(true);
-expect(prr.num.isAtLeastZero(-123)).toBe(false);
-expect(prr.num.isAtLeastZero(0)).toBe(true);
-expect(prr.num.isAtLeastZero('123')).toBe(false);
+expect(prr.isAtLeastZero(123)).toBe(true);
+expect(prr.isAtLeastZero(-123)).toBe(false);
+expect(prr.isAtLeastZero(0)).toBe(true);
+expect(prr.isAtLeastZero('123')).toBe(false);
 ```
 
 ---
 ### isAtMostZero
 Number → Boolean
 ```
-expect(prr.num.isAtMostZero(123)).toBe(false);
-expect(prr.num.isAtMostZero(-123)).toBe(true);
-expect(prr.num.isAtMostZero(0)).toBe(true);
-expect(prr.num.isAtMostZero('123')).toBe(false);
+expect(prr.isAtMostZero(123)).toBe(false);
+expect(prr.isAtMostZero(-123)).toBe(true);
+expect(prr.isAtMostZero(0)).toBe(true);
+expect(prr.isAtMostZero('123')).toBe(false);
 ```
 
 ---
 ### isCalendarMonth
 Number → Boolean
 ```
-expect(prr.num.isCalendarMonth(1)).toBe(true);
-expect(prr.num.isCalendarMonth(12)).toBe(true);
-expect(prr.num.isCalendarMonth(0)).toBe(false);
-expect(prr.num.isCalendarMonth(13)).toBe(false);
-expect(prr.num.isCalendarMonth('6')).toBe(false);
+expect(prr.isCalendarMonth(1)).toBe(true);
+expect(prr.isCalendarMonth(12)).toBe(true);
+expect(prr.isCalendarMonth(0)).toBe(false);
+expect(prr.isCalendarMonth(13)).toBe(false);
+expect(prr.isCalendarMonth('6')).toBe(false);
 ```
 
 ---
 ### isCalendarMonthZeroBased
 Number → Boolean
 ```
-expect(prr.num.isCalendarMonthZeroBased(0)).toBe(true);
-expect(prr.num.isCalendarMonthZeroBased(11)).toBe(true);
-expect(prr.num.isCalendarMonthZeroBased(-1)).toBe(false);
-expect(prr.num.isCalendarMonthZeroBased(12)).toBe(false);
-expect(prr.num.isCalendarMonthZeroBased('123')).toBe(false);
+expect(prr.isCalendarMonthZeroBased(0)).toBe(true);
+expect(prr.isCalendarMonthZeroBased(11)).toBe(true);
+expect(prr.isCalendarMonthZeroBased(-1)).toBe(false);
+expect(prr.isCalendarMonthZeroBased(12)).toBe(false);
+expect(prr.isCalendarMonthZeroBased('123')).toBe(false);
 ```
 
 ---
-### isBetween
+### isNumberBetween
 Number → Number → Number → Boolean
 ```
-expect(prr.num.isBetween(5, 10, 7)).toBe(true);
-expect(prr.num.isBetween(5, 10, 3)).toBe(false);
-expect(prr.num.isBetween(5, 10, 12)).toBe(false);
-expect(prr.num.isBetween(5, 10, '7')).toBe(false);
+expect(prr.isNumberBetween(5, 10, 7)).toBe(true);
+expect(prr.isNumberBetween(5, 10, 3)).toBe(false);
+expect(prr.isNumberBetween(5, 10, 12)).toBe(false);
+expect(prr.isNumberBetween(5, 10, '7')).toBe(false);
 ```
 
 ---
-### isBetweenInclusive
+### isNumberBetweenInclusive
 Number → Number → Number → Boolean
 ```
-expect(prr.num.isBetweenInclusive(5, 10, 7)).toBe(true);
-expect(prr.num.isBetweenInclusive(5, 10, 3)).toBe(false);
-expect(prr.num.isBetweenInclusive(5, 10, 12)).toBe(false);
-expect(prr.num.isBetweenInclusive(5, 10, 5)).toBe(true);
-expect(prr.num.isBetweenInclusive(5, 10, 10)).toBe(true);
-expect(prr.num.isBetweenInclusive(5, 10, '7')).toBe(false);
+expect(prr.isNumberBetweenInclusive(5, 10, 7)).toBe(true);
+expect(prr.isNumberBetweenInclusive(5, 10, 3)).toBe(false);
+expect(prr.isNumberBetweenInclusive(5, 10, 12)).toBe(false);
+expect(prr.isNumberBetweenInclusive(5, 10, 5)).toBe(true);
+expect(prr.isNumberBetweenInclusive(5, 10, 10)).toBe(true);
+expect(prr.isNumberBetweenInclusive(5, 10, '7')).toBe(false);
 ```
 
 ---
-### isEven
+### isEvenNumber
 Number → Boolean
 ```
-expect(prr.num.isEven(8)).toBe(true);
-expect(prr.num.isEven(-8)).toBe(true);
-expect(prr.num.isEven(5)).toBe(false);
+expect(prr.isEvenNumber(8)).toBe(true);
+expect(prr.isEvenNumber(-8)).toBe(true);
+expect(prr.isEvenNumber(5)).toBe(false);
 ```
 
 ---
-### isOdd
+### isOddNumber
 Number → Boolean
 ```
-expect(prr.num.isOdd(7)).toBe(true);
-expect(prr.num.isOdd(-7)).toBe(true);
-expect(prr.num.isOdd(8)).toBe(false);
+expect(prr.isOddNumber(7)).toBe(true);
+expect(prr.isOddNumber(-7)).toBe(true);
+expect(prr.isOddNumber(8)).toBe(false);
 ```
+
+---
+### numberIsOneOf
+Number → Array → Boolean
+```
+expect(prr.numberIsOneOf('foo', ['foo', 'bar', 'baz'])).toBe(true);
+expect(prr.numberIsOneOf('buz', ['foo', 'bar', 'baz'])).toBe(false);
+expect(prr.numberIsOneOf(123, ['foo', 'bar', 'baz'])).toBe(false);
+```
+
 
 ## Arrays
 
 ### isArray
 Array → Boolean
 ```
-expect(prr.arr.isArray(['foo'])).toBe(true);
-expect(prr.arr.isArray(123)).toBe(false);
+expect(prr.isArray(['foo'])).toBe(true);
+expect(prr.isArray(123)).toBe(false);
 ```
 
 ---
 ### isEmptyArray
 Array → Boolean
 ```
-expect(prr.arr.isEmptyArray([])).toBe(true);
-expect(prr.arr.isEmptyArray(['foo'])).toBe(false);
-expect(prr.arr.isEmptyArray('foo')).toBe(false);
+expect(prr.isEmptyArray([])).toBe(true);
+expect(prr.isEmptyArray(['foo'])).toBe(false);
+expect(prr.isEmptyArray('foo')).toBe(false);
 ```
 
 ---
 ### isArrayOfLength
 Number → Array → Boolean
 ```
-expect(prr.arr.isArrayOfLength(5, [1,2,3])).toBe(false);
-expect(prr.arr.isArrayOfLength(3, [1,2,3])).toBe(true);
-expect(prr.arr.isArrayOfLength(3, 123)).toBe(false);
+expect(prr.isArrayOfLength(5, [1,2,3])).toBe(false);
+expect(prr.isArrayOfLength(3, [1,2,3])).toBe(true);
+expect(prr.isArrayOfLength(3, 123)).toBe(false);
 ```
 
 ---
 ### isArrayOfLengthAtLeast
 Number → Array → Boolean
 ```
-expect(prr.arr.isArrayOfLengthAtLeast(5, [1,2,3])).toBe(false);
-expect(prr.arr.isArrayOfLengthAtLeast(3, [1,2,3])).toBe(true);
-expect(prr.arr.isArrayOfLengthAtLeast(3, [1,2,3,4])).toBe(true);
-expect(prr.arr.isArrayOfLengthAtLeast(3, 123)).toBe(false);
+expect(prr.isArrayOfLengthAtLeast(5, [1,2,3])).toBe(false);
+expect(prr.isArrayOfLengthAtLeast(3, [1,2,3])).toBe(true);
+expect(prr.isArrayOfLengthAtLeast(3, [1,2,3,4])).toBe(true);
+expect(prr.isArrayOfLengthAtLeast(3, 123)).toBe(false);
 ```
 
 ---
 ### isArrayOfLengthAtMost
 Number → Array → Boolean
 ```
-expect(prr.arr.isArrayOfLengthAtMost(3, [1,2,3,4])).toBe(false);
-expect(prr.arr.isArrayOfLengthAtMost(3, [1,2,3])).toBe(true);
-expect(prr.arr.isArrayOfLengthAtMost(5, [1,2,3,4])).toBe(true);
-expect(prr.arr.isArrayOfLengthAtMost(3, 123)).toBe(false);
+expect(prr.isArrayOfLengthAtMost(3, [1,2,3,4])).toBe(false);
+expect(prr.isArrayOfLengthAtMost(3, [1,2,3])).toBe(true);
+expect(prr.isArrayOfLengthAtMost(5, [1,2,3,4])).toBe(true);
+expect(prr.isArrayOfLengthAtMost(3, 123)).toBe(false);
 ```
 
 ---
 ### isArraylongerThan
 Number → Array → Boolean
 ```
-expect(prr.arr.isArrayLongerThan(5, [1,2,3])).toBe(false);
-expect(prr.arr.isArrayLongerThan(3, [1,2,3])).toBe(false);
-expect(prr.arr.isArrayLongerThan(3, [1,2,3,4])).toBe(true);
-expect(prr.arr.isArrayLongerThan(3, 123)).toBe(false);
+expect(prr.isArrayLongerThan(5, [1,2,3])).toBe(false);
+expect(prr.isArrayLongerThan(3, [1,2,3])).toBe(false);
+expect(prr.isArrayLongerThan(3, [1,2,3,4])).toBe(true);
+expect(prr.isArrayLongerThan(3, 123)).toBe(false);
 ```
 
 ---
-### isprr.arrhorterThan
+### isArrayShorterThan
 Number → Array → Boolean
 ```
-expect(prr.arr.isprr.arrhorterThan(3, [1,2,3,4])).toBe(false);
-expect(prr.arr.isprr.arrhorterThan(3, [1,2,3])).toBe(false);
-expect(prr.arr.isprr.arrhorterThan(5, [1,2,3,4])).toBe(true);
-expect(prr.arr.isprr.arrhorterThan(3, 123)).toBe(false);
+expect(prr.isArrayShorterThan(3, [1,2,3,4])).toBe(false);
+expect(prr.isArrayShorterThan(3, [1,2,3])).toBe(false);
+expect(prr.isArrayShorterThan(5, [1,2,3,4])).toBe(true);
+expect(prr.isArrayShorterThan(3, 123)).toBe(false);
 ```
 
 ---
 ### isArrayContaining
 String → Array → Boolean
 ```
-expect(prr.arr.isArrayContaining('bar', ['foo','bar','baz'])).toBe(true);
-expect(prr.arr.isArrayContaining('bar', ['foo','baz','buz'])).toBe(false);
+expect(prr.isArrayContaining('bar', ['foo','bar','baz'])).toBe(true);
+expect(prr.isArrayContaining('bar', ['foo','baz','buz'])).toBe(false);
 ```
 
 ## TODO
 * Add object pretty cats
 * Add more cats
+
+
+[travis-image]: https://travis-ci.org/SeanCannon/prettycats.svg?branch=master
+[travis-url]: https://travis-ci.org/SeanCannon/prettycats
+
+[coveralls-image]: https://coveralls.io/repos/SeanCannon/prettycats/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/r/SeanCannon/prettycats?branch=master

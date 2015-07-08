@@ -109,64 +109,75 @@ describe('number predicates', function() {
     });
   });
 
-  describe('isBetween', function() {
+  describe('isNumberBetween', function() {
     it('should pass when given a subject of type Number that falls between expected min and max', function() {
-      expect(numbers.isBetween(5, 10, 7)).toBe(true);
+      expect(numbers.isNumberBetween(5, 10, 7)).toBe(true);
     });
     it('should fail when given a subject of type Number that is less than the range minimum', function() {
-      expect(numbers.isBetween(5, 10, 3)).toBe(false);
+      expect(numbers.isNumberBetween(5, 10, 3)).toBe(false);
     });
     it('should fail when given a subject of type Number that is greater than the range maximum', function() {
-      expect(numbers.isBetween(5, 10, 12)).toBe(false);
+      expect(numbers.isNumberBetween(5, 10, 12)).toBe(false);
     });
     it('should fail when given a subject not of type Number', function() {
-      expect(numbers.isBetween(5, 10, '7')).toBe(false);
+      expect(numbers.isNumberBetween(5, 10, '7')).toBe(false);
     });
   });
 
-  describe('isBetweenInclusive', function() {
+  describe('isNumberBetweenInclusive', function() {
     it('should pass when given a subject of type Number that falls between expected min and max', function() {
-      expect(numbers.isBetweenInclusive(5, 10, 7)).toBe(true);
+      expect(numbers.isNumberBetweenInclusive(5, 10, 7)).toBe(true);
     });
     it('should fail when given a subject of type Number that is less than the range minimum', function() {
-      expect(numbers.isBetweenInclusive(5, 10, 3)).toBe(false);
+      expect(numbers.isNumberBetweenInclusive(5, 10, 3)).toBe(false);
     });
     it('should fail when given a subject of type Number that is greater than the range maximum', function() {
-      expect(numbers.isBetweenInclusive(5, 10, 12)).toBe(false);
+      expect(numbers.isNumberBetweenInclusive(5, 10, 12)).toBe(false);
     });
     it('should pass when given a subject of type Number that is equal to the range minimum', function() {
-      expect(numbers.isBetweenInclusive(5, 10, 5)).toBe(true);
+      expect(numbers.isNumberBetweenInclusive(5, 10, 5)).toBe(true);
     });
     it('should pass when given a subject of type Number that is equal to the range maximum', function() {
-      expect(numbers.isBetweenInclusive(5, 10, 10)).toBe(true);
+      expect(numbers.isNumberBetweenInclusive(5, 10, 10)).toBe(true);
     });
     it('should fail when given a subject not of type Number', function() {
-      expect(numbers.isBetweenInclusive(5, 10, '7')).toBe(false);
+      expect(numbers.isNumberBetweenInclusive(5, 10, '7')).toBe(false);
     });
   });
 
-  describe('isEven', function() {
+  describe('isEvenNumber', function() {
     it('should pass when given a subject of type Number that is positive and even', function() {
-      expect(numbers.isEven(8)).toBe(true);
+      expect(numbers.isEvenNumber(8)).toBe(true);
     });
     it('should pass when given a subject of type Number that is negative and even', function() {
-      expect(numbers.isEven(-8)).toBe(true);
+      expect(numbers.isEvenNumber(-8)).toBe(true);
     });
     it('should fail when given a subject of type Number that is odd', function() {
-      expect(numbers.isEven(5)).toBe(false);
+      expect(numbers.isEvenNumber(5)).toBe(false);
     });
   });
 
-  describe('isOdd', function() {
+  describe('isOddNumber', function() {
     it('should pass when given a subject of type Number that is positive and odd', function() {
-      expect(numbers.isOdd(7)).toBe(true);
+      expect(numbers.isOddNumber(7)).toBe(true);
     });
     it('should pass when given a subject of type Number that is negative and odd', function() {
-      expect(numbers.isOdd(-7)).toBe(true);
+      expect(numbers.isOddNumber(-7)).toBe(true);
     });
     it('should fail when given a subject of type Number that is even', function() {
-      expect(numbers.isOdd(8)).toBe(false);
+      expect(numbers.isOddNumber(8)).toBe(false);
     });
   });
 
+  describe('numberIsOneOf', function() {
+    it('should pass when given a subject of type Number that also exists in the selection array', function() {
+      expect(numbers.numberIsOneOf([123, 456, 789], 123)).toBe(true);
+    });
+    it('should fail when given a subject of type Number that does not appear in the selection array', function() {
+      expect(numbers.numberIsOneOf([12, 34, 56], 123)).toBe(false);
+    });
+    it('should fail when given a subject not of type Number', function() {
+      expect(numbers.numberIsOneOf([123, 456, 789], '123')).toBe(false);
+    });
+  });
 });

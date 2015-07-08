@@ -103,6 +103,18 @@ describe('string predicates', function() {
     });
   });
 
+  describe('stringIsOneOf', function() {
+    it('should pass when given a subject of type String that also exists in the selection array', function() {
+      expect(strings.stringIsOneOf(['foo', 'bar', 'baz'], 'foo')).toBe(true);
+    });
+    it('should fail when given a subject of type String that does not appear in the selection array', function() {
+      expect(strings.stringIsOneOf(['foo', 'bar', 'baz'], 'buz')).toBe(false);
+    });
+    it('should fail when given a subject not of type String', function() {
+      expect(strings.stringIsOneOf(['foo', 'bar', 'baz'], 123)).toBe(false);
+    });
+  });
+
   describe('isEmail', function() {
     it('should pass when given a common email address', function() {
       expect(strings.isEmail('foo@bar.com')).toBe(true);
