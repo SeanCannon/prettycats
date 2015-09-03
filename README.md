@@ -250,9 +250,9 @@ expect(prr.isNumericBoolean('1')).toBe(false);
 ### numberIsOneOf
 Number → Array → Boolean
 ```
-expect(numbers.numberIsOneOf([123, 456, 789], 123)).toBe(true);
-expect(numbers.numberIsOneOf([12, 34, 56], 123)).toBe(false);
-expect(numbers.numberIsOneOf([123, 456, 789], '123')).toBe(false);
+expect(prr.numberIsOneOf([123, 456, 789], 123)).toBe(true);
+expect(prr.numberIsOneOf([12, 34, 56], 123)).toBe(false);
+expect(prr.numberIsOneOf([123, 456, 789], '123')).toBe(false);
 ```
 
 
