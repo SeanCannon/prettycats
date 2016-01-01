@@ -127,5 +127,17 @@ describe('string predicates', function() {
     });
   });
 
+  describe('isJSON', function() {
+    it('should pass when given correctly formatted JSON', function() {
+      expect(strings.isJSON('{}')).toBe(true);
+      expect(strings.isJSON('{"foo":"bar"}')).toBe(true);
+    });
+    it('should fail when given a value not of type String', function() {
+      expect(strings.isJSON(123)).toBe(false);
+    });
+    it('should fail when given an invalid JSON string', function() {
+      expect(strings.isJSON('{foo:"bar"}')).toBe(false);
+    });
+  });
 });
 

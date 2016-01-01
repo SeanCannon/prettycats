@@ -125,6 +125,16 @@ expect(prr.isEmail('123@localhost:1337')).toBe(true);
 expect(prr.isEmail('foobar.com')).toBe(false);
 ```
 
+---
+### isJSON
+String → Boolean
+```
+expect(prr.isJSON('foo')).toBe(false);
+expect(prr.isJSON('{foo:"bar"}')).toBe(false);
+expect(prr.isJSON('{}')).toBe(true);
+expect(prr.isJSON('{"foo":"bar"}')).toBe(true);
+```
+
 ## Numbers
 
 ### isNumber
