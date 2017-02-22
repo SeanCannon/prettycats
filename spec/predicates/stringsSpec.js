@@ -85,6 +85,39 @@ describe('string predicates', () => {
     });
   });
 
+
+  describe('isStringOfLengthBetween', () => {
+    it('passes when given a subject of type String with expected length', () => {
+      expect(strings.isStringOfLengthBetween(5, 9, 'foobar')).toBe(true);
+    });
+    it('fails when given a subject of type String shorter than minimum required length', () => {
+      expect(strings.isStringOfLengthBetween(5, 9, 'foo')).toBe(false);
+    });
+    it('fails when given a subject of type String longer than maximum required length', () => {
+      expect(strings.isStringOfLengthBetween(5, 9, 'foobarbazbat')).toBe(false);
+    });
+    it('fails when given a subject not of type String', () => {
+      expect(strings.isStringOfLengthBetween(3, 5, 123)).toBe(false);
+    });
+  });
+
+  describe('isStringOfLengthBetweenInclusive', () => {
+    it('passes when given a subject of type String with expected length', () => {
+      expect(strings.isStringOfLengthBetweenInclusive(5, 9, 'foobar')).toBe(true);
+      expect(strings.isStringOfLengthBetweenInclusive(5, 9, 'fooba')).toBe(true);
+      expect(strings.isStringOfLengthBetweenInclusive(5, 9, 'foobarbaz')).toBe(true);
+    });
+    it('fails when given a subject of type String shorter than minimum required length', () => {
+      expect(strings.isStringOfLengthBetweenInclusive(5, 9, 'foo')).toBe(false);
+    });
+    it('fails when given a subject of type String longer than maximum required length', () => {
+      expect(strings.isStringOfLengthBetweenInclusive(5, 9, 'foobarbazbat')).toBe(false);
+    });
+    it('fails when given a subject not of type String', () => {
+      expect(strings.isStringOfLengthBetweenInclusive(3, 5, 123)).toBe(false);
+    });
+  });
+
   describe('isStringContaining', () => {
     it('passes when given a subject of type String containing an expected substring', () => {
       expect(strings.isStringContaining('bar', 'foobarfoo')).toBe(true);

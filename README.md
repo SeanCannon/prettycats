@@ -107,6 +107,28 @@ expect(prr.isStringShorterThan(3, 123)).toBe(false);
 ```
 
 ---
+### isStringOfLengthBetween
+Number → Number → String → Boolean
+```
+expect(prr.isStringOfLengthBetween(5, 9, 'foobar')).toBe(true);
+expect(prr.isStringOfLengthBetween(5, 9, 'foo')).toBe(false);
+expect(prr.isStringOfLengthBetween(5, 9, 'foobarbazbat')).toBe(false);
+expect(prr.isStringOfLengthBetween(3, 5, 123)).toBe(false);
+```
+
+---
+### isStringOfLengthBetweenInclusive
+Number → Number → String → Boolean
+```
+expect(prr.isStringOfLengthBetweenInclusive(5, 9, 'foobar')).toBe(true);
+expect(prr.isStringOfLengthBetweenInclusive(5, 9, 'fooba')).toBe(true);
+expect(prr.isStringOfLengthBetweenInclusive(5, 9, 'foobarbaz')).toBe(true);
+expect(prr.isStringOfLengthBetweenInclusive(5, 9, 'foo')).toBe(false);
+expect(prr.isStringOfLengthBetweenInclusive(5, 9, 'foobarbazbat')).toBe(false);
+expect(prr.isStringOfLengthBetweenInclusive(3, 5, 123)).toBe(false);
+```
+
+---
 ### isStringContaining
 String → String → Boolean
 ```
