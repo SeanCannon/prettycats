@@ -19,17 +19,32 @@ $ npm test
 
 ```js
 
-var prr = require('prettycats'),
-    R   = require('ramda');
+const prr = require('prettycats'),
+      R   = require('ramda'),
+      V   = require('nested-validate');
 
-// Sample validator
-var Validator = require('o-validator');
-
-Validator.validateOrThrow({
+const userType = {
   username : prr.isStringOfLengthAtMost(15),
-  email    : Validator.required(prr.isEmail),
+  email    : prr.isEmail,
   age      : prr.isNumberBetween(13, 100)
-});
+};
+
+const user = {
+  username : 'dayman',
+  email    : 'charlie@kittenmittons.com',
+  age      : 31
+};
+
+
+// Use for simple type checking
+if (prr.objectSatisfies(userType, user)) {
+  // cool
+}
+
+// Or use with a validator
+const validateUserOrThrow = V.isObjectOf(userType);
+
+validateUserOrThrow(userType, user);
 
 ```
 
@@ -134,6 +149,7 @@ expect(prr.isJSON('{foo:"bar"}')).toBe(false);
 expect(prr.isJSON('{}')).toBe(true);
 expect(prr.isJSON('{"foo":"bar"}')).toBe(true);
 ```
+
 
 ## Numbers
 
@@ -341,6 +357,70 @@ expect(prr.isArrayContaining('bar', ['foo','bar','baz'])).toBe(true);
 expect(prr.isArrayContaining('bar', ['foo','baz','buz'])).toBe(false);
 ```
 
+
+## Objects
+
+### isObject
+Object → Boolean
+```
+expect(prr.isObject({ foo : 'bar' })).toBe(true);
+expect(prr.isObject(123)).toBe(false);
+```
+
+---
+### isObjectContaining
+String → Object → Boolean
+```
+expect(prr.isObjectContaining('foo', { foo : 'bar', baz : 'bat' })).toBe(true);
+expect(prr.isObjectContaining('foo', { baz : 'bat', buz : 'biz' })).toBe(false);
+expect(prr.isObjectContaining('foo', 123)).toBe(false);
+```
+
+---
+### isObjectAbsent
+String → Object → Boolean
+```
+expect(prr.isObjectAbsent('foo', { baz : 'bat', buz : 'biz' })).toBe(true);
+expect(prr.isObjectAbsent('foo', { foo : 'bar', buz : 'biz' })).toBe(false);
+expect(prr.isObjectAbsent('foo', 123)).toBe(false);
+```
+
+---
+### isObjectMatching
+Object → Object → Boolean
+```
+expect(prr.isObjectMatching({ foo : 'bar' }, { foo : 'bar' })).toBe(true);
+expect(prr.isObjectMatching({ foo : 'bar' }, { baz : 'bat' })).toBe(false);
+expect(prr.isObjectMatching({ foo : 'bar' }, 'foo')).toBe(false);
+expect(prr.isObjectMatching('foo', { foo : 'bar' })).toBe(false);
+```
+
+---
+### isObjectExtending
+Object → Object → Boolean
+```
+expect(prr.isObjectExtending({ foo : 'bar' }, { foo : 'bar', baz : 'bat' })).toBe(true);
+expect(prr.isObjectExtending({ foo : 'bar' }, { foo : 'bar' })).toBe(true);
+expect(prr.isObjectExtending({ foo : 'bar' }, 'foo')).toBe(false);
+expect(prr.isObjectExtending('foo', { foo : 'bar' })).toBe(false);
+```
+
+---
+### isObjectSatisfying
+Object → Object → Boolean
+```
+const schema = {
+  foo : v => typeof v === 'string',
+  bar : v => typeof v === 'number'
+};
+    
+expect(objects.isObjectSatisfying(schema, { foo : 'hello', bar : 123 })).toBe(true);
+expect(objects.isObjectSatisfying(schema, { foo : 'hello' })).toBe(false);
+expect(objects.isObjectSatisfying({ foo : 'bar' }, { baz : 'bat' })).toBe(false);
+expect(objects.isObjectSatisfying({ foo : 'bar' }, 'foo')).toBe(false);
+expect(objects.isObjectSatisfying('foo', { foo : 'bar' })).toBe(false);
+```
+
+---
 ## TODO
-* Add object pretty cats
-* Add more cats
+* Change the litter box

@@ -1,141 +1,141 @@
 'use strict';
 
-var strings = require('../../lib/predicates/strings');
+const strings = require('../../lib/predicates/strings');
 
-describe('string predicates', function() {
+describe('string predicates', () => {
 
-  describe('isString', function() {
-    it('should pass when given a subject of type String', function() {
+  describe('isString', () => {
+    it('passes when given a subject of type String', () => {
       expect(strings.isString('foo')).toBe(true);
     });
-    it('should fail when given a subject not of type String', function() {
+    it('fails when given a subject not of type String', () => {
       expect(strings.isString(123)).toBe(false);
     });
   });
 
-  describe('isStringOfLength', function() {
-    it('should fail when given a subject of type String with unexpected length', function() {
+  describe('isStringOfLength', () => {
+    it('fails when given a subject of type String with unexpected length', () => {
       expect(strings.isStringOfLength(5, 'foo')).toBe(false);
     });
-    it('should pass when given a subject of type String with expected length', function() {
+    it('passes when given a subject of type String with expected length', () => {
       expect(strings.isStringOfLength(3, 'foo')).toBe(true);
     });
-    it('should fail when given a subject not of type String', function() {
+    it('fails when given a subject not of type String', () => {
       expect(strings.isStringOfLength(3, 123)).toBe(false);
     });
   });
 
-  describe('isStringOfLengthAtLeast', function() {
-    it('should fail when given a subject of type String with unexpected length', function() {
+  describe('isStringOfLengthAtLeast', () => {
+    it('fails when given a subject of type String with unexpected length', () => {
       expect(strings.isStringOfLengthAtLeast(5, 'foo')).toBe(false);
     });
-    it('should pass when given a subject of type String with the minimum expected length', function() {
+    it('passes when given a subject of type String with the minimum expected length', () => {
       expect(strings.isStringOfLengthAtLeast(3, 'foo')).toBe(true);
     });
-    it('should pass when given a subject of type String with greater than the minimum expected length', function() {
+    it('passes when given a subject of type String with greater than the minimum expected length', () => {
       expect(strings.isStringOfLengthAtLeast(3, 'fooo')).toBe(true);
     });
-    it('should fail when given a subject not of type String', function() {
+    it('fails when given a subject not of type String', () => {
       expect(strings.isStringOfLengthAtLeast(3, 123)).toBe(false);
     });
   });
 
-  describe('isStringOfLengthAtMost', function() {
-    it('should fail when given a subject of type String with unexpected length', function() {
+  describe('isStringOfLengthAtMost', () => {
+    it('fails when given a subject of type String with unexpected length', () => {
       expect(strings.isStringOfLengthAtMost(5, 'fooooo')).toBe(false);
     });
-    it('should pass when given a subject of type String with the maximum expected length', function() {
+    it('passes when given a subject of type String with the maximum expected length', () => {
       expect(strings.isStringOfLengthAtMost(3, 'foo')).toBe(true);
     });
-    it('should pass when given a subject of type String with less than the maximum expected length', function() {
+    it('passes when given a subject of type String with less than the maximum expected length', () => {
       expect(strings.isStringOfLengthAtMost(5, 'fooo')).toBe(true);
     });
-    it('should fail when given a subject not of type String', function() {
+    it('fails when given a subject not of type String', () => {
       expect(strings.isStringOfLengthAtMost(3, 123)).toBe(false);
     });
   });
 
-  describe('isStringLongerThan', function() {
-    it('should fail when given a subject of type String with unexpected length', function() {
+  describe('isStringLongerThan', () => {
+    it('fails when given a subject of type String with unexpected length', () => {
       expect(strings.isStringLongerThan(5, 'foo')).toBe(false);
     });
-    it('should fail when given a subject of type String with the cutoff length', function() {
+    it('fails when given a subject of type String with the cutoff length', () => {
       expect(strings.isStringLongerThan(3, 'foo')).toBe(false);
     });
-    it('should pass when given a subject of type String with greater than the minimum expected length', function() {
+    it('passes when given a subject of type String with greater than the minimum expected length', () => {
       expect(strings.isStringLongerThan(3, 'fooo')).toBe(true);
     });
-    it('should fail when given a subject not of type String', function() {
+    it('fails when given a subject not of type String', () => {
       expect(strings.isStringLongerThan(3, 123)).toBe(false);
     });
   });
 
-  describe('isStringShorterThan', function() {
-    it('should fail when given a subject of type String with unexpected length', function() {
+  describe('isStringShorterThan', () => {
+    it('fails when given a subject of type String with unexpected length', () => {
       expect(strings.isStringShorterThan(3, 'fooo')).toBe(false);
     });
-    it('should fail when given a subject of type String with the cutoff length', function() {
+    it('fails when given a subject of type String with the cutoff length', () => {
       expect(strings.isStringShorterThan(3, 'foo')).toBe(false);
     });
-    it('should pass when given a subject of type String with less than the minimum expected length', function() {
+    it('passes when given a subject of type String with less than the minimum expected length', () => {
       expect(strings.isStringShorterThan(5, 'fooo')).toBe(true);
     });
-    it('should fail when given a subject not of type String', function() {
+    it('fails when given a subject not of type String', () => {
       expect(strings.isStringShorterThan(3, 123)).toBe(false);
     });
   });
 
-  describe('isStringContaining', function() {
-    it('should pass when given a subject of type String containing an expected substring', function() {
+  describe('isStringContaining', () => {
+    it('passes when given a subject of type String containing an expected substring', () => {
       expect(strings.isStringContaining('bar', 'foobarfoo')).toBe(true);
     });
-    it('should fail when given a subject of type String not containing an expected substring', function() {
+    it('fails when given a subject of type String not containing an expected substring', () => {
       expect(strings.isStringContaining('bar', 'foobazfoo')).toBe(false);
     });
   });
 
-  describe('isStringMatching', function() {
-    it('should pass when given a subject of type String matching an expected pattern', function() {
+  describe('isStringMatching', () => {
+    it('passes when given a subject of type String matching an expected pattern', () => {
       expect(strings.isStringMatching(/bar/, 'foobarfoo')).toBe(true);
     });
-    it('should fail when given a subject of type String not matching an expected pattern', function() {
+    it('fails when given a subject of type String not matching an expected pattern', () => {
       expect(strings.isStringMatching(/bar/, 'foobazfoo')).toBe(false);
     });
   });
 
-  describe('stringIsOneOf', function() {
-    it('should pass when given a subject of type String that also exists in the selection array', function() {
+  describe('stringIsOneOf', () => {
+    it('passes when given a subject of type String that also exists in the selection array', () => {
       expect(strings.stringIsOneOf(['foo', 'bar', 'baz'], 'foo')).toBe(true);
     });
-    it('should fail when given a subject of type String that does not appear in the selection array', function() {
+    it('fails when given a subject of type String that does not appear in the selection array', () => {
       expect(strings.stringIsOneOf(['foo', 'bar', 'baz'], 'buz')).toBe(false);
     });
-    it('should fail when given a subject not of type String', function() {
+    it('fails when given a subject not of type String', () => {
       expect(strings.stringIsOneOf(['foo', 'bar', 'baz'], 123)).toBe(false);
     });
   });
 
-  describe('isEmail', function() {
-    it('should pass when given a common email address', function() {
+  describe('isEmail', () => {
+    it('passes when given a common email address', () => {
       expect(strings.isEmail('foo@bar.com')).toBe(true);
     });
-    it('should pass when given an unorthodox email address', function() {
+    it('passes when given an unorthodox email address', () => {
       expect(strings.isEmail('123@localhost:1337')).toBe(true);
     });
-    it('should fail when given an invalid email address', function() {
+    it('fails when given an invalid email address', () => {
       expect(strings.isEmail('foobar.com')).toBe(false);
     });
   });
 
-  describe('isJSON', function() {
-    it('should pass when given correctly formatted JSON', function() {
+  describe('isJSON', () => {
+    it('passes when given correctly formatted JSON', () => {
       expect(strings.isJSON('{}')).toBe(true);
       expect(strings.isJSON('{"foo":"bar"}')).toBe(true);
     });
-    it('should fail when given a value not of type String', function() {
+    it('fails when given a value not of type String', () => {
       expect(strings.isJSON(123)).toBe(false);
     });
-    it('should fail when given an invalid JSON string', function() {
+    it('fails when given an invalid JSON string', () => {
       expect(strings.isJSON('{foo:"bar"}')).toBe(false);
     });
   });
