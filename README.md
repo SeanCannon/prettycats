@@ -436,11 +436,11 @@ const schema = {
   bar : v => typeof v === 'number'
 };
     
-expect(objects.isObjectSatisfying(schema, { foo : 'hello', bar : 123 })).toBe(true);
-expect(objects.isObjectSatisfying(schema, { foo : 'hello' })).toBe(false);
-expect(objects.isObjectSatisfying({ foo : 'bar' }, { baz : 'bat' })).toBe(false);
-expect(objects.isObjectSatisfying({ foo : 'bar' }, 'foo')).toBe(false);
-expect(objects.isObjectSatisfying('foo', { foo : 'bar' })).toBe(false);
+expect(prr.isObjectSatisfying(schema, { foo : 'hello', bar : 123 })).toBe(true);
+expect(prr.isObjectSatisfying(schema, { foo : 'hello' })).toBe(false);
+expect(prr.isObjectSatisfying({ foo : 'bar' }, { baz : 'bat' })).toBe(false);
+expect(prr.isObjectSatisfying({ foo : 'bar' }, 'foo')).toBe(false);
+expect(prr.isObjectSatisfying('foo', { foo : 'bar' })).toBe(false);
 ```
 
 ---
