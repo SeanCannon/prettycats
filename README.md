@@ -146,11 +146,11 @@ expect(prr.isStringMatching(/bar/, 'foobazfoo')).toBe(false);
 
 ---
 ### stringIsOneOf
-String → Array → Boolean
+Array → String → Boolean
 ```
-expect(prr.stringIsOneOf('foo', ['foo', 'bar', 'baz'])).toBe(true);
-expect(prr.stringIsOneOf('buz', ['foo', 'bar', 'baz'])).toBe(false);
-expect(prr.stringIsOneOf(123, ['foo', 'bar', 'baz'])).toBe(false);
+expect(prr.stringIsOneOf(['foo', 'bar', 'baz'], 'foo')).toBe(true);
+expect(prr.stringIsOneOf(['foo', 'bar', 'baz'], 'buz')).toBe(false);
+expect(prr.stringIsOneOf(['foo', 'bar', 'baz'], 123)).toBe(false);
 ```
 
 ---
