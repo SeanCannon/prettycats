@@ -160,6 +160,21 @@ describe('string predicates', () => {
     });
   });
 
+  describe('isNumericString', () => {
+    it('passes when given a stringified number', () => {
+      expect(strings.isNumericString('123')).toBe(true);
+    });
+    it('fails when given an actual number', () => {
+      expect(strings.isNumericString(123)).toBe(false);
+    });
+    it('fails when given a type other than string', () => {
+      expect(strings.isNumericString({ foo : 'bar' })).toBe(false);
+    });
+    it('fails when given a string representing something other than a number', () => {
+      expect(strings.isNumericString('asd123asd')).toBe(false);
+    });
+  });
+
   describe('isJSON', () => {
     it('passes when given correctly formatted JSON', () => {
       expect(strings.isJSON('{}')).toBe(true);

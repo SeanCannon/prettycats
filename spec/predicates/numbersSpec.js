@@ -181,6 +181,19 @@ describe('number predicates', () => {
     });
   });
 
+  describe('isNumericString', () => {
+    it('passes when given a stringified number', () => {
+      expect(numbers.isNumeric('123')).toBe(true);
+    });
+    it('passes when given an actual number', () => {
+      expect(numbers.isNumeric(123)).toBe(true);
+    });
+    it('fails when given a non-numeric value', () => {
+      expect(numbers.isNumeric({ foo : 'bar' })).toBe(false);
+      expect(numbers.isNumeric('asd123asd')).toBe(false);
+    });
+  });
+
   describe('isNumericBoolean', () => {
     it('passes when given 0', () => {
       expect(numbers.isNumericBoolean(0)).toBe(true);

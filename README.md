@@ -163,6 +163,16 @@ expect(prr.isEmail('foobar.com')).toBe(false);
 ```
 
 ---
+### isNumericString
+String → Boolean
+```
+expect(prr.isNumericString('123')).toBe(true);
+expect(prr.isNumericString(123)).toBe(false);
+expect(prr.isNumericString({ foo : 'bar' })).toBe(false);
+expect(prr.isNumericString('asd123asd')).toBe(false);
+```
+
+---
 ### isJSON
 String → Boolean
 ```
@@ -282,6 +292,15 @@ Number → Boolean
 expect(prr.isOddNumber(7)).toBe(true);
 expect(prr.isOddNumber(-7)).toBe(true);
 expect(prr.isOddNumber(8)).toBe(false);
+```
+---
+### isNumeric
+* → Boolean
+```
+expect(prr.isNumeric('123')).toBe(true);
+expect(prr.isNumeric(123)).toBe(true);
+expect(prr.isNumeric({ foo : 'bar' })).toBe(false);
+expect(prr.isNumeric('asd123asd')).toBe(false);
 ```
 
 ---
