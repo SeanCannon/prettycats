@@ -175,6 +175,23 @@ describe('string predicates', () => {
     });
   });
 
+  describe('isTimestamp', () => {
+    it('passes when given supported variations of a timestamp', () => {
+      expect(strings.isTimestamp('2017-08-24T19:20:30.457Z')).toBe(true);
+      expect(strings.isTimestamp('2017-08-24T19:20:30.45+01:00')).toBe(true);
+      expect(strings.isTimestamp('2017-08-24T19:20:30-05:00')).toBe(true);
+      expect(strings.isTimestamp('2017-08-24T19:20:30Z')).toBe(true);
+    });
+    it('fails when given unsupported variations of datetime strings', () => {
+      expect(strings.isTimestamp('Thu Aug 24 2017 19:20:30 GMT-0700 (PDT)')).toBe(false);
+      expect(strings.isTimestamp('Thu Aug 24 2017')).toBe(false);
+    });
+    it('fails when given a type other than string', () => {
+      expect(strings.isTimestamp({ foo : 'bar' })).toBe(false);
+      expect(strings.isTimestamp(2017)).toBe(false);
+    });
+  });
+
   describe('isJSON', () => {
     it('passes when given correctly formatted JSON', () => {
       expect(strings.isJSON('{}')).toBe(true);

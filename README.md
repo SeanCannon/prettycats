@@ -163,6 +163,21 @@ expect(prr.isEmail('foobar.com')).toBe(false);
 ```
 
 ---
+### isTimestamp
+String → Boolean
+```
+expect(prr.isTimestamp('2017-08-24T19:20:30.457Z')).toBe(true);
+expect(prr.isTimestamp('2017-08-24T19:20:30.45+01:00')).toBe(true);
+expect(prr.isTimestamp('2017-08-24T19:20:30-05:00')).toBe(true);
+expect(prr.isTimestamp('2017-08-24T19:20:30Z')).toBe(true);
+
+expect(prr.isTimestamp('Thu Aug 24 2017 19:20:30 GMT-0700 (PDT)')).toBe(false);
+expect(prr.isTimestamp('Thu Aug 24 2017')).toBe(false);
+
+expect(prr.isTimestamp(2017)).toBe(false);
+```
+
+---
 ### isNumericString
 String → Boolean
 ```
