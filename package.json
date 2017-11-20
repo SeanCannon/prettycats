@@ -1,24 +1,27 @@
 {
-  "name"            : "prettycats",
-  "version"         : "0.4.0",
-  "description"     : "Helpful, common, and curried predicates library built on Ramda.",
-  "main"            : "lib/prettycats.js",
-  "dependencies"    : {
-    "ramda"       : "^0.x.x"
+  "name": "prettycats",
+  "version": "0.5.0",
+  "description": "Helpful, common, and curried predicates library built on Ramda.",
+  "main": "dist/prettycats.js",
+  "dependencies": {
+    "ramda": "^0.x.x"
   },
-  "devDependencies" : {
-    "coveralls" : "^2.11.2",
-    "istanbul"  : "^0.3.13",
-    "jasmine"   : "^2.3.1"
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-minify": "^0.2.0",
+    "babel-preset-env": "^1.6.1",
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.13",
+    "jasmine": "^2.3.1"
   },
-  "scripts"         : {
-    "test" : "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine"
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine"
   },
-  "repository"      : {
-    "type" : "git",
-    "url"  : "https://github.com/seancannon/prettycats.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seancannon/prettycats.git"
   },
-  "keywords"        : [
+  "keywords": [
     "validator",
     "validation",
     "predicates",
@@ -28,10 +31,15 @@
     "aliencreations",
     "ramda"
   ],
-  "author"          : "Sean Cannon",
-  "license"         : "MIT",
-  "bugs"            : {
-    "url" : "https://github.com/seancannon/prettycats/issues"
+  "author": "Sean Cannon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seancannon/prettycats/issues"
   },
-  "homepage"        : "https://github.com/seancannon/prettycats"
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "homepage": "https://github.com/seancannon/prettycats"
 }
