@@ -1,21 +1,22 @@
 {
   "name": "prettycats",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Helpful, common, and curried predicates library built on Ramda.",
   "main": "dist/prettycats.js",
   "dependencies": {
-    "ramda": "^0.x.x"
+    "ramda": "^0.26.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-minify": "^0.2.0",
-    "babel-preset-env": "^1.6.1",
-    "coveralls": "^2.11.2",
-    "istanbul": "^0.3.13",
-    "jasmine": "^2.3.1"
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "coveralls": "^3.0.7",
+    "jasmine": "^2.4.1",
+    "nyc": "^14.1.1"
   },
   "scripts": {
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine"
+    "test": "./node_modules/.bin/nyc --reporter=lcov --reporter=text-summary ./node_modules/.bin/jasmine",
+    "build": "./node_modules/.bin/babel lib --out-dir dist --source-maps inline --presets=@babel/preset-env"
   },
   "repository": {
     "type": "git",
@@ -35,11 +36,6 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/seancannon/prettycats/issues"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   },
   "homepage": "https://github.com/seancannon/prettycats"
 }
