@@ -469,12 +469,21 @@ const schema = {
   foo : v => typeof v === 'string',
   bar : v => typeof v === 'number'
 };
-    
+
 expect(prr.isObjectSatisfying(schema, { foo : 'hello', bar : 123 })).toBe(true);
 expect(prr.isObjectSatisfying(schema, { foo : 'hello' })).toBe(false);
 expect(prr.isObjectSatisfying({ foo : 'bar' }, { baz : 'bat' })).toBe(false);
 expect(prr.isObjectSatisfying({ foo : 'bar' }, 'foo')).toBe(false);
 expect(prr.isObjectSatisfying('foo', { foo : 'bar' })).toBe(false);
+```
+
+## Primitives
+
+### isBoolean
+Boolean → Boolean
+```
+expect(prr.isBoolean(['foo'])).toBe(false);
+expect(prr.isBoolean(false)).toBe(true);
 ```
 
 ---
