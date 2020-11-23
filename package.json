@@ -1,6 +1,6 @@
 {
   "name": "prettycats",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Helpful, common, and curried predicates library built on Ramda.",
   "main": "dist/prettycats.js",
   "dependencies": {
