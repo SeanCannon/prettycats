@@ -486,6 +486,3 @@ expect(prr.isBoolean(['foo'])).toBe(false);
 expect(prr.isBoolean(false)).toBe(true);
 ```
 
----
-## TODO
-* Change the litter box
