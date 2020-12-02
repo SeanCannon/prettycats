@@ -1,7 +1,8 @@
 language: node_js
 node_js:
-  - 4
-  - 6
   - 8
+  - 10
+  - 12
+  - 14
 after_script:
   - "./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info"
