@@ -192,6 +192,21 @@ describe('string predicates', () => {
     });
   });
 
+  describe('isMySqlTimestamp', () => {
+    it('passes when given supported variations of a MySQL timestamp', () => {
+      expect(strings.isMySqlTimestamp('2012-06-22 05:40:06')).toBe(true);
+      expect(strings.isMySqlTimestamp('2021-11-03 11:15:59')).toBe(true);
+    });
+    it('fails when given unsupported variations of datetime strings', () => {
+      expect(strings.isMySqlTimestamp('Thu Aug 24 2017')).toBe(false);
+      expect(strings.isMySqlTimestamp('Thu Aug 24 2017 19:20:30 GMT-0700 (PDT)')).toBe(false);
+    });
+    it('fails when given a type other than string', () => {
+      expect(strings.isMySqlTimestamp({ foo : 'bar' })).toBe(false);
+      expect(strings.isMySqlTimestamp(2017)).toBe(false);
+    });
+  });
+
   describe('isJSON', () => {
     it('passes when given correctly formatted JSON', () => {
       expect(strings.isJSON('{}')).toBe(true);
