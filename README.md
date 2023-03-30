@@ -45,7 +45,6 @@ if (prr.objectSatisfies(userType, user)) {
 const validateUserOrThrow = V.isObjectOf(userType);
 
 validateUserOrThrow(userType, user);
-
 ```
 
 ## Strings
@@ -195,6 +194,16 @@ expect(prr.isJSON('foo')).toBe(false);
 expect(prr.isJSON('{foo:"bar"}')).toBe(false);
 expect(prr.isJSON('{}')).toBe(true);
 expect(prr.isJSON('{"foo":"bar"}')).toBe(true);
+```
+
+---
+### isUuid
+String → Boolean
+```
+expect(prr.isUuid('foo')).toBe(false);
+expect(prr.isUuid(123)).toBe(false);
+expect(prr.isUuid('cd17c371-9468-963b-f3e0bf05e70e')).toBe(false);
+expect(prr.isUuid('cd17c371-9468-4baa-963b-f3e0bf05e70e')).toBe(true);
 ```
 
 

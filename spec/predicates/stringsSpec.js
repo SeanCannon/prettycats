@@ -219,5 +219,17 @@ describe('string predicates', () => {
       expect(strings.isJSON('{foo:"bar"}')).toBe(false);
     });
   });
+
+  describe('isUuid', () => {
+    it('passes when given a correctly formatted UUID', () => {
+      expect(strings.isUuid('cd17c371-9468-4baa-963b-f3e0bf05e70e')).toBe(true);
+    });
+    it('fails when given a value not of type String', () => {
+      expect(strings.isUuid(123)).toBe(false);
+    });
+    it('fails when given an invalid UUID string', () => {
+      expect(strings.isUuid('cd17c371-9468-963b-f3e0bf05e70e')).toBe(false);
+    });
+  });
 });
 
