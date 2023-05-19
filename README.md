@@ -47,6 +47,13 @@ const validateUserOrThrow = V.isObjectOf(userType);
 validateUserOrThrow(userType, user);
 ```
 
+# Interface
+- [Strings](#strings)
+- [Numbers](#numbers)
+- [Arrays](#arrays)
+- [Objects](#objects)
+- [Primitives](#primitives)
+
 ## Strings
 
 ### isString
@@ -187,19 +194,29 @@ expect(prr.isNumericString('asd123asd')).toBe(false);
 ```
 
 ---
-### isJSON
+### isJSON / isJson
 String → Boolean
 ```
 expect(prr.isJSON('foo')).toBe(false);
 expect(prr.isJSON('{foo:"bar"}')).toBe(false);
 expect(prr.isJSON('{}')).toBe(true);
 expect(prr.isJSON('{"foo":"bar"}')).toBe(true);
+
+expect(prr.isJson('foo')).toBe(false);
+expect(prr.isJson('{foo:"bar"}')).toBe(false);
+expect(prr.isJson('{}')).toBe(true);
+expect(prr.isJson('{"foo":"bar"}')).toBe(true);
 ```
 
 ---
-### isUuid
+### isUUID / isUuid
 String → Boolean
 ```
+expect(prr.isUUID('foo')).toBe(false);
+expect(prr.isUUID(123)).toBe(false);
+expect(prr.isUUID('cd17c371-9468-963b-f3e0bf05e70e')).toBe(false);
+expect(prr.isUUID('cd17c371-9468-4baa-963b-f3e0bf05e70e')).toBe(true);
+
 expect(prr.isUuid('foo')).toBe(false);
 expect(prr.isUuid(123)).toBe(false);
 expect(prr.isUuid('cd17c371-9468-963b-f3e0bf05e70e')).toBe(false);

@@ -1,10 +1,10 @@
 {
   "name": "prettycats",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "description": "Helpful, common, and curried predicates library built on Ramda.",
   "main": "dist/prettycats.js",
   "dependencies": {
-    "ramda": "^0.27.x"
+    "ramda": "^0.29.x"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
