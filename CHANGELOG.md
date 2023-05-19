@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 Changes not listed here (skipped semver) are typically dependency updates or README fixes.
 
 
+## [0.7.9] - 2023-05-19
+
+### Added
+
+- missing build files from [0.7.8]
+
+
 ## [0.7.8] - 2023-05-19
 
 ### Added
