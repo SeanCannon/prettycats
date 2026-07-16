@@ -1,22 +1,31 @@
 {
   "name": "prettycats",
-  "version": "0.7.9",
-  "description": "Helpful, common, and curried predicates library built on Ramda.",
-  "main": "dist/prettycats.js",
+  "version": "1.0.0",
+  "description": "Curried predicates for validating subjects for TS, powered by `fpure`",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "sideEffects": false,
   "dependencies": {
-    "ramda": "^0.29.x"
+    "fpure": "^0.2.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
-    "coveralls": "^3.0.7",
-    "jasmine": "^2.4.1",
-    "nyc": "^14.1.1"
+    "typescript": "^5.5.0",
+    "vitest": "^1.6.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/nyc --reporter=lcov --reporter=text-summary ./node_modules/.bin/jasmine",
-    "build": "./node_modules/.bin/babel lib --out-dir dist --source-maps inline --presets=@babel/preset-env"
+    "build": "tsc",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,8 +38,8 @@
     "pretty",
     "cats",
     "seancannon",
-    "aliencreations",
-    "ramda"
+    "fpure",
+    "typescript"
   ],
   "author": "Sean Cannon",
   "license": "MIT",

@@ -1,0 +1,16 @@
+export declare function isDate(value: unknown): value is Date;
+export declare function isValidDate(value: unknown): value is Date;
+export declare function isDateInPast(value: unknown): value is Date;
+export declare function isDateInFuture(value: unknown): value is Date;
+export declare function isDateToday(value: unknown): value is Date;
+export declare function isDateYesterday(value: unknown): value is Date;
+export declare function isDateTomorrow(value: unknown): value is Date;
+export declare function isWeekend(value: unknown): value is Date;
+export declare function isWeekday(value: unknown): value is Date;
+export declare const isLeapYear: ((value: unknown) => boolean) & ((...args: any[]) => any);
+export declare const isDateInRange: ((start: Date, end: Date, value: unknown) => boolean) & ((...args: any[]) => any);
+export declare const isSameDate: ((a: unknown, b: unknown) => boolean) & ((...args: any[]) => any);
+export declare const isAfterDate: ((reference: unknown, value: unknown) => boolean) & ((...args: any[]) => any);
+export declare const isBeforeDate: ((reference: unknown, value: unknown) => boolean) & ((...args: any[]) => any);
+export declare const isDateInMonth: ((month: number, value: unknown) => boolean) & ((...args: any[]) => any);
+export declare const isDateInYear: ((year: number, value: unknown) => boolean) & ((...args: any[]) => any);

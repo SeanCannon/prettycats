@@ -1,0 +1,18 @@
+export declare function isBoolean(value: unknown): value is boolean;
+export declare function isUndefined(value: unknown): value is undefined;
+export declare function isNull(value: unknown): value is null;
+export declare function isNil(value: unknown): value is null | undefined;
+export declare function isDefined(value: unknown): boolean;
+export declare function isFunction(value: unknown): value is (...args: unknown[]) => unknown;
+export declare function isSymbol(value: unknown): value is symbol;
+export declare function isBigInt(value: unknown): value is bigint;
+export declare function isPrimitive(value: unknown): boolean;
+export declare function isPromise(value: unknown): value is Promise<unknown>;
+export declare function isRegExp(value: unknown): value is RegExp;
+export declare function isError(value: unknown): value is Error;
+export declare function isMap(value: unknown): value is Map<unknown, unknown>;
+export declare function isSet(value: unknown): value is Set<unknown>;
+export declare function isWeakMap(value: unknown): value is WeakMap<object, unknown>;
+export declare function isWeakSet(value: unknown): value is WeakSet<object>;
+export declare const isInstanceOf: ((ctor: new (...args: unknown[]) => unknown, value: unknown) => boolean) & ((...args: any[]) => any);
+export declare const isTypeOf: ((typeName: string, value: unknown) => boolean) & ((...args: any[]) => any);

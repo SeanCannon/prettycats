@@ -1,46 +1,120 @@
-'use strict';
-
-var R = require('ramda'),
-    __ = require('./_private.js');
-
-var isNumberBetween = R.curry(function (min, max, n) {
-  return R.is(Number, n) && n > min && n < max;
-});
-var isNumberBetweenInclusive = R.curry(function (min, max, n) {
-  return R.is(Number, n) && n >= min && n <= max;
-});
-var numberIsOneOf = R.curry(function (selectionArr, num) {
-  return R.allPass([R.is(Number), R.includes(R.__, selectionArr)])(num);
-});
-
-var isNumber = R.is(Number),
-    isPositiveNumber = R.allPass([isNumber, R.gt(R.__, 0)]),
-    isAtLeastZero = R.allPass([isNumber, R.gte(R.__, 0)]),
-    isNegativeNumber = R.allPass([isNumber, R.lt(R.__, 0)]),
-    isAtMostZero = R.allPass([isNumber, R.lte(R.__, 0)]),
-    isCalendarMonth = isNumberBetweenInclusive(1, 12),
-    isCalendarMonthZeroBased = isNumberBetweenInclusive(0, 11),
-    isEvenNumber = __.modTwoEq(0),
-    isOddNumber = __.modTwoEq(1),
-    isNumeric = function isNumeric(v) {
-  return !isNaN(parseInt(v, 10));
-},
-    isNumericBoolean = R.includes(R.__, [0, 1]);
-
-module.exports = {
-  isNumber: isNumber,
-  isNumberBetween: isNumberBetween,
-  isNumberBetweenInclusive: isNumberBetweenInclusive,
-  isPositiveNumber: isPositiveNumber,
-  isNegativeNumber: isNegativeNumber,
-  isEvenNumber: isEvenNumber,
-  isOddNumber: isOddNumber,
-  isAtLeastZero: isAtLeastZero,
-  isAtMostZero: isAtMostZero,
-  isCalendarMonth: isCalendarMonth,
-  isCalendarMonthZeroBased: isCalendarMonthZeroBased,
-  numberIsOneOf: numberIsOneOf,
-  isNumeric: isNumeric,
-  isNumericBoolean: isNumericBoolean
-};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL2xpYi9wcmVkaWNhdGVzL251bWJlcnMuanMiXSwibmFtZXMiOlsiUiIsInJlcXVpcmUiLCJfXyIsImlzTnVtYmVyQmV0d2VlbiIsImN1cnJ5IiwibWluIiwibWF4IiwibiIsImlzIiwiTnVtYmVyIiwiaXNOdW1iZXJCZXR3ZWVuSW5jbHVzaXZlIiwibnVtYmVySXNPbmVPZiIsInNlbGVjdGlvbkFyciIsIm51bSIsImFsbFBhc3MiLCJpbmNsdWRlcyIsImlzTnVtYmVyIiwiaXNQb3NpdGl2ZU51bWJlciIsImd0IiwiaXNBdExlYXN0WmVybyIsImd0ZSIsImlzTmVnYXRpdmVOdW1iZXIiLCJsdCIsImlzQXRNb3N0WmVybyIsImx0ZSIsImlzQ2FsZW5kYXJNb250aCIsImlzQ2FsZW5kYXJNb250aFplcm9CYXNlZCIsImlzRXZlbk51bWJlciIsIm1vZFR3b0VxIiwiaXNPZGROdW1iZXIiLCJpc051bWVyaWMiLCJ2IiwiaXNOYU4iLCJwYXJzZUludCIsImlzTnVtZXJpY0Jvb2xlYW4iLCJtb2R1bGUiLCJleHBvcnRzIl0sIm1hcHBpbmdzIjoiQUFBQTs7QUFFQSxJQUFNQSxDQUFDLEdBQUlDLE9BQU8sQ0FBQyxPQUFELENBQWxCO0FBQUEsSUFDTUMsRUFBRSxHQUFHRCxPQUFPLENBQUMsZUFBRCxDQURsQjs7QUFHQSxJQUFNRSxlQUFlLEdBQUdILENBQUMsQ0FBQ0ksS0FBRixDQUFRLFVBQUNDLEdBQUQsRUFBTUMsR0FBTixFQUFXQyxDQUFYLEVBQWlCO0FBQy9DLFNBQU9QLENBQUMsQ0FBQ1EsRUFBRixDQUFLQyxNQUFMLEVBQWFGLENBQWIsS0FBbUJBLENBQUMsR0FBR0YsR0FBdkIsSUFBOEJFLENBQUMsR0FBR0QsR0FBekM7QUFDRCxDQUZ1QixDQUF4QjtBQUlBLElBQU1JLHdCQUF3QixHQUFHVixDQUFDLENBQUNJLEtBQUYsQ0FBUSxVQUFDQyxHQUFELEVBQU1DLEdBQU4sRUFBV0MsQ0FBWCxFQUFpQjtBQUN4RCxTQUFPUCxDQUFDLENBQUNRLEVB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QWRlLENBQWpCIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG5jb25zdCBSICA9IHJlcXVpcmUoJ3JhbWRhJyksXG4gICAgICBfXyA9IHJlcXVpcmUoJy4vX3ByaXZhdGUuanMnKTtcblxuY29uc3QgaXNOdW1iZXJCZXR3ZWVuID0gUi5jdXJyeSgobWluLCBtYXgsIG4pID0+IHtcbiAgcmV0dXJuIFIuaXMoTnVtYmVyLCBuKSAmJiBuID4gbWluICYmIG4gPCBtYXg7XG59KTtcblxuY29uc3QgaXNOdW1iZXJCZXR3ZWVuSW5jbHVzaXZlID0gUi5jdXJyeSgobWluLCBtYXgsIG4pID0+IHtcbiAgcmV0dXJuIFIuaXMoTnVtYmVyLCBuKSAmJiBuID49IG1pbiAmJiBuIDw9IG1heDtcbn0pO1xuXG5jb25zdCBudW1iZXJJc09uZU9mID0gUi5jdXJyeSgoc2VsZWN0aW9uQXJyLCBudW0pID0+IHtcbiAgcmV0dXJuIFIuYWxsUGFzcyhbUi5pcyhOdW1iZXIpLCBSLmluY2x1ZGVzKFIuX18sIHNlbGVjdGlvbkFycildKShudW0pO1xufSk7XG5cbmNvbnN0IGlzTnVtYmVyICAgICAgICAgICAgICAgICA9IFIuaXMoTnVtYmVyKSxcbiAgICAgIGlzUG9zaXRpdmVOdW1iZXIgICAgICAgICA9IFIuYWxsUGFzcyhbaXNOdW1iZXIsIFIuZ3QoUi5fXywgMCldKSxcbiAgICAgIGlzQXRMZWFzdFplcm8gICAgICAgICAgICA9IFIuYWxsUGFzcyhbaXNOdW1iZXIsIFIuZ3RlKFIuX18sIDApXSksXG4gICAgICBpc05lZ2F0aXZlTnVtYmVyICAgICAgICAgPSBSLmFsbFBhc3MoW2lzTnVtYmVyLCBSLmx0KFIuX18sIDApXSksXG4gICAgICBpc0F0TW9zdFplcm8gICAgICAgICAgICAgPSBSLmFsbFBhc3MoW2lzTnVtYmVyLCBSLmx0ZShSLl9fLCAwKV0pLFxuICAgICAgaXNDYWxlbmRhck1vbnRoICAgICAgICAgID0gaXNOdW1iZXJCZXR3ZWVuSW5jbHVzaXZlKDEsIDEyKSxcbiAgICAgIGlzQ2FsZW5kYXJNb250aFplcm9CYXNlZCA9IGlzTnVtYmVyQmV0d2VlbkluY2x1c2l2ZSgwLCAxMSksXG4gICAgICBpc0V2ZW5OdW1iZXIgICAgICAgICAgICAgPSBfXy5tb2RUd29FcSgwKSxcbiAgICAgIGlzT2RkTnVtYmVyICAgICAgICAgICAgICA9IF9fLm1vZFR3b0VxKDEpLFxuICAgICAgaXNOdW1lcmljICAgICAgICAgICAgICAgID0gdiA9PiAhaXNOYU4ocGFyc2VJbnQodiwgMTApKSxcbiAgICAgIGlzTnVtZXJpY0Jvb2xlYW4gICAgICAgICA9IFIuaW5jbHVkZXMoUi5fXywgWzAsIDFdKTtcblxubW9kdWxlLmV4cG9ydHMgPSB7XG4gIGlzTnVtYmVyLFxuICBpc051bWJlckJldHdlZW4sXG4gIGlzTnVtYmVyQmV0d2VlbkluY2x1c2l2ZSxcbiAgaXNQb3NpdGl2ZU51bWJlcixcbiAgaXNOZWdhdGl2ZU51bWJlcixcbiAgaXNFdmVuTnVtYmVyLFxuICBpc09kZE51bWJlcixcbiAgaXNBdExlYXN0WmVybyxcbiAgaXNBdE1vc3RaZXJvLFxuICBpc0NhbGVuZGFyTW9udGgsXG4gIGlzQ2FsZW5kYXJNb250aFplcm9CYXNlZCxcbiAgbnVtYmVySXNPbmVPZixcbiAgaXNOdW1lcmljLFxuICBpc051bWVyaWNCb29sZWFuXG59O1xuIl19
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isMultipleOf = exports.isNumericBoolean = exports.isOddNumber = exports.isEvenNumber = exports.isCalendarMonthZeroBased = exports.isCalendarMonth = exports.isAtMostZero = exports.isAtLeastZero = exports.isNegativeNumber = exports.isPositiveNumber = exports.numberIsOneOf = exports.isNumberBetweenInclusive = exports.isNumberBetween = void 0;
+exports.isNumber = isNumber;
+exports.isNumeric = isNumeric;
+exports.isInteger = isInteger;
+exports.isFloat = isFloat;
+exports.isFiniteNumber = isFiniteNumber;
+exports.isNaNValue = isNaNValue;
+exports.isSafeInteger = isSafeInteger;
+exports.isZero = isZero;
+exports.isPositiveZero = isPositiveZero;
+exports.isNegativeZero = isNegativeZero;
+exports.isNonPositive = isNonPositive;
+exports.isNonNegative = isNonNegative;
+exports.isPercent = isPercent;
+exports.isPortNumber = isPortNumber;
+exports.isHTTPStatusCode = isHTTPStatusCode;
+exports.isUnitInterval = isUnitInterval;
+exports.isIndex = isIndex;
+exports.isArrayIndex = isArrayIndex;
+exports.isPrime = isPrime;
+exports.isPowerOfTwo = isPowerOfTwo;
+const fpure_1 = require("fpure");
+function isNumber(value) {
+    return typeof value === 'number';
+}
+exports.isNumberBetween = (0, fpure_1.curry)((low, high, value) => typeof value === 'number' && value > low && value < high);
+exports.isNumberBetweenInclusive = (0, fpure_1.curry)((low, high, value) => typeof value === 'number' && value >= low && value <= high);
+exports.numberIsOneOf = (0, fpure_1.curry)((selection, value) => typeof value === 'number' && selection.indexOf(value) !== -1);
+const isPositiveNumber = (value) => typeof value === 'number' && value > 0;
+exports.isPositiveNumber = isPositiveNumber;
+const isNegativeNumber = (value) => typeof value === 'number' && value < 0;
+exports.isNegativeNumber = isNegativeNumber;
+const isAtLeastZero = (value) => typeof value === 'number' && value >= 0;
+exports.isAtLeastZero = isAtLeastZero;
+const isAtMostZero = (value) => typeof value === 'number' && value <= 0;
+exports.isAtMostZero = isAtMostZero;
+const isCalendarMonth = (value) => typeof value === 'number' && value >= 1 && value <= 12;
+exports.isCalendarMonth = isCalendarMonth;
+const isCalendarMonthZeroBased = (value) => typeof value === 'number' && value >= 0 && value <= 11;
+exports.isCalendarMonthZeroBased = isCalendarMonthZeroBased;
+const isEvenNumber = (value) => typeof value === 'number' && value % 2 === 0;
+exports.isEvenNumber = isEvenNumber;
+const isOddNumber = (value) => typeof value === 'number' && value % 2 !== 0;
+exports.isOddNumber = isOddNumber;
+function isNumeric(value) {
+    return !isNaN(parseInt(String(value), 10));
+}
+const isNumericBoolean = (value) => typeof value === 'number' && (value === 0 || value === 1);
+exports.isNumericBoolean = isNumericBoolean;
+function isInteger(value) {
+    return Number.isInteger(value);
+}
+function isFloat(value) {
+    return typeof value === 'number' && !Number.isInteger(value);
+}
+function isFiniteNumber(value) {
+    return Number.isFinite(value);
+}
+function isNaNValue(value) {
+    return Number.isNaN(value);
+}
+function isSafeInteger(value) {
+    return Number.isSafeInteger(value);
+}
+exports.isMultipleOf = (0, fpure_1.curry)((divisor, value) => typeof value === 'number' && divisor !== 0 && value % divisor === 0);
+function isZero(value) {
+    return value === 0;
+}
+function isPositiveZero(value) {
+    return Object.is(value, 0);
+}
+function isNegativeZero(value) {
+    return Object.is(value, -0);
+}
+function isNonPositive(value) {
+    return typeof value === 'number' && value <= 0;
+}
+function isNonNegative(value) {
+    return typeof value === 'number' && value >= 0;
+}
+function isPercent(value) {
+    return typeof value === 'number' && value >= 0 && value <= 100;
+}
+function isPortNumber(value) {
+    return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= 65535;
+}
+function isHTTPStatusCode(value) {
+    return typeof value === 'number' && Number.isInteger(value) && value >= 100 && value <= 599;
+}
+function isUnitInterval(value) {
+    return typeof value === 'number' && value >= 0 && value <= 1;
+}
+function isIndex(value) {
+    return typeof value === 'number' && Number.isInteger(value) && value >= 0;
+}
+function isArrayIndex(value) {
+    return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value < 2 ** 32 - 1;
+}
+function isPrime(value) {
+    if (typeof value !== 'number' || !Number.isInteger(value))
+        return false;
+    const n = value;
+    if (n <= 1)
+        return false;
+    if (n <= 3)
+        return true;
+    if (n % 2 === 0 || n % 3 === 0)
+        return false;
+    for (let i = 5; i * i <= n; i += 6) {
+        if (n % i === 0 || n % (i + 2) === 0)
+            return false;
+    }
+    return true;
+}
+function isPowerOfTwo(value) {
+    return typeof value === 'number' && value > 0 && (value & (value - 1)) === 0;
+}
+//# sourceMappingURL=numbers.js.map

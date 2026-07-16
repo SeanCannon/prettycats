@@ -1,15 +1,63 @@
-'use strict';
-
-var R = require('ramda');
-
-module.exports = {
-  isObject: R.is(Object),
-  isObjectContaining: R.has,
-  isObjectAbsent: R.curry(function (k, o) {
-    return R.is(Object, o) && !R.has(k, o);
-  }),
-  isObjectMatching: R.tryCatch(R.equals, R.F),
-  isObjectExtending: R.tryCatch(R.whereEq, R.F),
-  isObjectSatisfying: R.tryCatch(R.where, R.F)
-};
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL2xpYi9wcmVkaWNhdGVzL29iamVjdHMuanMiXSwibmFtZXMiOlsiUiIsInJlcXVpcmUiLCJtb2R1bGUiLCJleHBvcnRzIiwiaXNPYmplY3QiLCJpcyIsIk9iamVjdCIsImlzT2JqZWN0Q29udGFpbmluZyIsImhhcyIsImlzT2JqZWN0QWJzZW50IiwiY3VycnkiLCJrIiwibyIsImlzT2JqZWN0TWF0Y2hpbmciLCJ0cnlDYXRjaCIsImVxdWFscyIsIkYiLCJpc09iamVjdEV4dGVuZGluZyIsIndoZXJlRXEiLCJpc09iamVjdFNhdGlzZnlpbmciLCJ3aGVyZSJdLCJtYXBwaW5ncyI6IkFBQUE7O0FBRUEsSUFBTUEsQ0FBQyxHQUFHQyxPQUFPLENBQUMsT0FBRCxDQUFqQjs7QUFFQUMsTUFBTSxDQUFDQyxPQUFQLEdBQWlCO0FBQ2ZDLEVBQUFBLFFBQVEsRUFBYUosQ0FBQyxDQUFDSyxFQUFGLENBQUtDLE1BQUwsQ0FETjtBQUVmQyxFQUFBQSxrQkFBa0IsRUFBR1AsQ0FBQyxDQUFDUSxHQUZSO0FBR2ZDLEVBQUFBLGNBQWMsRUFBT1QsQ0FBQyxDQUFDVSxLQUFGLENBQVEsVUFBQ0MsQ0FBRCxFQUFJQyxDQUFKO0FBQUEsV0FBVVosQ0FBQyxDQUFDSyxFQUFGLENBQUtDLE1BQUwsRUFBYU0sQ0FBYixLQUFtQixDQUFDWixDQUFDLENBQUNRLEdBQUYsQ0FBTUcsQ0FBTixFQUFTQyxDQUFULENBQTlCO0FBQUEsR0FBUixDQUhOO0FBSWZDLEVBQUFBLGdCQUFnQixFQUFLYixDQUFDLENBQUNjLFFBQUYsQ0FBV2QsQ0FBQyxDQUFDZSxNQUFiLEVBQXNCZixDQUFDLENBQUNnQixDQUF4QixDQUpOO0FBS2ZDLEVBQUFBLGlCQUFpQixFQUFJakIsQ0FBQyxDQUFDYyxRQUFGLENBQVdkLENBQUMsQ0FBQ2tCLE9BQWIsRUFBc0JsQixDQUFDLENBQUNnQixDQUF4QixDQUxOO0FBTWZHLEVBQUFBLGtCQUFrQixFQUFHbkIsQ0FBQyxDQUFDYyxRQUFGLENBQVdkLENBQUMsQ0FBQ29CLEtBQWIsRUFBc0JwQixDQUFDLENBQUNnQixDQUF4QjtBQU5OLENBQWpCIiwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBzdHJpY3QnO1xuXG5jb25zdCBSID0gcmVxdWlyZSgncmFtZGEnKTtcblxubW9kdWxlLmV4cG9ydHMgPSB7XG4gIGlzT2JqZWN0ICAgICAgICAgICA6IFIuaXMoT2JqZWN0KSxcbiAgaXNPYmplY3RDb250YWluaW5nIDogUi5oYXMsXG4gIGlzT2JqZWN0QWJzZW50ICAgICA6IFIuY3VycnkoKGssIG8pID0+IFIuaXMoT2JqZWN0LCBvKSAmJiAhUi5oYXMoaywgbykpLFxuICBpc09iamVjdE1hdGNoaW5nICAgOiBSLnRyeUNhdGNoKFIuZXF1YWxzLCAgUi5GKSxcbiAgaXNPYmplY3RFeHRlbmRpbmcgIDogUi50cnlDYXRjaChSLndoZXJlRXEsIFIuRiksXG4gIGlzT2JqZWN0U2F0aXNmeWluZyA6IFIudHJ5Q2F0Y2goUi53aGVyZSwgICBSLkYpXG59O1xuIl19
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isObjectContainingAny = exports.isObjectContainingAll = exports.isObjectWithKeys = exports.isObjectSatisfying = exports.isObjectExtending = exports.isObjectMatching = exports.isObjectAbsent = exports.isObjectContaining = void 0;
+exports.isObject = isObject;
+exports.isEmptyObject = isEmptyObject;
+exports.isNonEmptyObject = isNonEmptyObject;
+exports.isPlainObject = isPlainObject;
+exports.isFrozenObject = isFrozenObject;
+exports.isSealedObject = isSealedObject;
+exports.isExtensibleObject = isExtensibleObject;
+const fpure_1 = require("fpure");
+function guardObject(fn) {
+    return ((...args) => {
+        try {
+            return fn(...args);
+        }
+        catch (_a) {
+            return false;
+        }
+    });
+}
+function isObject(value) {
+    return value !== null && typeof value === 'object';
+}
+exports.isObjectContaining = (0, fpure_1.curry)((key, value) => isObject(value) && Object.prototype.hasOwnProperty.call(value, key));
+exports.isObjectAbsent = (0, fpure_1.curry)((key, value) => isObject(value) && !Object.prototype.hasOwnProperty.call(value, key));
+exports.isObjectMatching = guardObject((0, fpure_1.curry)((a, b) => {
+    if (!isObject(a) || !isObject(b))
+        return false;
+    return (0, fpure_1.equals)(a, b);
+}));
+exports.isObjectExtending = guardObject((0, fpure_1.curry)((schema, value) => {
+    if (!isObject(schema) || !isObject(value))
+        return false;
+    return (0, fpure_1.whereEq)(schema, value);
+}));
+exports.isObjectSatisfying = guardObject((0, fpure_1.curry)((schema, value) => {
+    if (!isObject(schema) || !isObject(value))
+        return false;
+    return (0, fpure_1.where)(schema, value);
+}));
+function isEmptyObject(value) {
+    return isObject(value) && Object.keys(value).length === 0;
+}
+function isNonEmptyObject(value) {
+    return isObject(value) && Object.keys(value).length > 0;
+}
+function isPlainObject(value) {
+    return value !== null && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype;
+}
+function isFrozenObject(value) {
+    return isObject(value) && Object.isFrozen(value);
+}
+function isSealedObject(value) {
+    return isObject(value) && Object.isSealed(value);
+}
+function isExtensibleObject(value) {
+    return isObject(value) && Object.isExtensible(value);
+}
+exports.isObjectWithKeys = (0, fpure_1.curry)((keys, value) => isObject(value) && Object.keys(value).length === keys.length && keys.every(k => Object.prototype.hasOwnProperty.call(value, k)));
+exports.isObjectContainingAll = (0, fpure_1.curry)((keys, value) => isObject(value) && keys.every(k => Object.prototype.hasOwnProperty.call(value, k)));
+exports.isObjectContainingAny = (0, fpure_1.curry)((keys, value) => isObject(value) && keys.some(k => Object.prototype.hasOwnProperty.call(value, k)));
+//# sourceMappingURL=objects.js.map
